@@ -63,6 +63,12 @@ function CreateEmployee({ id, register }) {
             setToastOpen(true);
             return;
         }
+        if (salary < 0 || bonus < 0) {
+            setToastMessage("salary and bonus can not be less than zero");
+            setToastSeverity("error");
+            setToastOpen(true);
+            return
+        }
         const data = {
             firstName: firstname,
             lastName: lastname,
