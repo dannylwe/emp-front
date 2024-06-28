@@ -10,8 +10,10 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { FiMoreVertical } from 'react-icons/fi';
+import { BiLogOut } from 'react-icons/bi';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Tooltip from '@mui/material/Tooltip';
 
 const EmployeeTable = () => {
     const navigate = useNavigate();
@@ -86,6 +88,12 @@ const EmployeeTable = () => {
         handleClose();
     };
 
+    const handleLogout = () => {
+        // Implement logout logic here, e.g., clear token from localStorage
+        localStorage.removeItem('token');
+        navigate('/login'); // Redirect to login page after logout
+    };
+
     useEffect(() => {
         async function getEmployeeData() {
             const token = localStorage.getItem('token');
@@ -109,20 +117,30 @@ const EmployeeTable = () => {
 
     return (
         <React.Fragment>
-            <div className="flex mb-4">
-                <button
-                    className="bg-green-500 text-white py-2 px-4 rounded mr-2 hover:bg-green-600"
-                    onClick={onClickCreate}
-                >
-                    Create Employee
-                </button>
-                <button
-                    className="bg-teal-600 text-white py-2 px-4 rounded hover:bg-teal-700"
-                    onClick={downloadCsv}
-                >
-                    Download Csv
-                </button>
+            <div className="flex mb-4 justify-between items-center">
+                <div>
+                    <button
+                        className="bg-green-500 text-white py-2 px-4 rounded mr-2 hover:bg-green-600"
+                        onClick={onClickCreate}
+                    >
+                        Create Employee
+                    </button>
+                    <button
+                        className="bg-teal-600 text-white py-2 px-4 rounded hover:bg-teal-700"
+                        onClick={downloadCsv}
+                    >
+                        Download Csv
+                    </button>
+                </div>
+                <div>
+                    <Tooltip title="Logout" arrow>
+                        <IconButton onClick={handleLogout} className="bg-red-600 text-white rounded-full">
+                            <BiLogOut />
+                        </IconButton>
+                    </Tooltip>
+                </div>
             </div>
+            
 
             <TableContainer component={Paper} className="shadow-lg rounded-lg">
                 <Table sx={{ minWidth: 650 }} aria-label="employee table">
