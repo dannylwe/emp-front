@@ -165,7 +165,7 @@ const EmployeeTable = () => {
                                 <TableCell>{row.email}</TableCell>
                                 <TableCell>{row.phone}</TableCell>
                                 <TableCell>{row.department}</TableCell>
-                                <TableCell>{row.salary !== null ? row.salary : 'N/A'}</TableCell>
+                                <TableCell>{row.salary !== null ? row.salary.baseSalary : 'N/A'}</TableCell>
                                 <TableCell>
                                     <IconButton onClick={(event) => handleClick(event, row)}>
                                         <FiMoreVertical />

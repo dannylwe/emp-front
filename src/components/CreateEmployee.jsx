@@ -8,6 +8,8 @@ function CreateEmployee({ id, register }) {
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
+    const [salary, setSalary] = useState("");
+    const [bonus, setBonus] = useState("");
     const [department, setDepartment] = useState("");
     const [password, setPassword] = useState("");
     const [confirm, setConfirm] = useState("");
@@ -38,6 +40,8 @@ function CreateEmployee({ id, register }) {
                 setDepartment(employee.department);
                 setPassword(employee.password);
                 setConfirm(employee.confirm);
+                setSalary(employee?.salary?.baseSalary || 0);
+                setBonus(employee?.salary?.bonus || 0);
                 setisUpdateForm(true);
             }
         };
@@ -65,7 +69,9 @@ function CreateEmployee({ id, register }) {
             email,
             phone,
             department,
-            password
+            password,
+            baseSalary: salary,
+            bonus
         };
         try {
             const token = localStorage.getItem('token');
@@ -111,14 +117,18 @@ function CreateEmployee({ id, register }) {
                     ) : (
                         <h1 className="text-center text-2xl mb-6 text-gray-600 font-bold font-sans">Update Employee</h1>
                     )}
-                    <div>
-                        <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="firstname">Firstname</label>
-                        <input className="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="firstname" id="firstname" placeholder="Firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+                    <div className="flex space-x-14" id="firstname__lastname">
+                        <div>
+                            <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="firstname">Firstname</label>
+                            <input className="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="firstname" id="firstname" placeholder="Firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+                        </div>
+                        <div>
+                            <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="lastname">Lastname</label>
+                            <input className="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="lastname" id="lastname" placeholder="Lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+                        </div>
                     </div>
-                    <div>
-                        <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="lastname">Lastname</label>
-                        <input className="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="lastname" id="lastname" placeholder="Lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
-                    </div>
+                    
+                    <div className="flex space-x-14" id="phone__department">
                     <div>
                         <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="phone">Phone</label>
                         <input className="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="phone" id="phone" placeholder="Phone number" value={phone} onChange={(e) => setPhone(e.target.value)} />
@@ -140,9 +150,19 @@ function CreateEmployee({ id, register }) {
                             </div>
                         </div>
                     </div>
+                    </div>
+                    <div>
+                        <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="salary">Salary</label>
+                        <input className="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="salary" id="salary" placeholder="salary" value={salary} onChange={(e) => setSalary(e.target.value)} />
+                    </div>
+                    <div>
+                        <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="bonus">Bonus</label>
+                        <input className="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="bonus" id="bonus" placeholder="bonus" value={bonus} onChange={(e) => setBonus(e.target.value)} />
+                    </div>
+                    
                     <div>
                         <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="email">Email</label>
-                        <input className="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="email" id="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input className="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="email" name="email" id="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div>
                         <label className="text-gray-800 font-semibold block my-3 text-md" htmlFor="password">Password</label>
