@@ -13,7 +13,7 @@ const PrivateRoute = () => {
         return;
       }
       
-      const url = `http://localhost:5103/api/Employee/1`;
+      const url = `http://localhost:5103/api/Employee`;
       try {
         const resp = await axios.get(url, {
           headers: { 'Authorization': 'Bearer ' + token }
